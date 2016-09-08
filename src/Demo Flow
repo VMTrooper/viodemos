@@ -1,0 +1,33 @@
+1. Control Plane
+
+2. Image Import
+glance image-create --name glance-template-import --disk-format vmdk --container-format bare
+glance location-add 2c90545a-295b-484d-8bdc-59bc844ac363 --url vi://prme-haas-2-vio-vcenter.eng.vmware.com/VIO/vm/Template/ubuntu-15_04-template
+
+3. L2GW
+
+4. VIO Monitor
+sudo viocli deployment status
+sudo viocli deployment status -v
+
+5. OS Profiler
+
+
+
+
+(openstack)~ $ glance help location-delete
+usage: glance location-delete --url <URL> <IMAGE_ID>
+
+Remove locations (and related metadata) from an image.
+
+Positional arguments:
+  <IMAGE_ID>   ID of image whose locations are to be removed.
+
+Optional arguments:
+  --url <URL>  URL of location to remove. May be used multiple times.
+(openstack)~ $ glance location-delete 79e9f1b0-af46-4011-9bab-9bffb3bde846
+usage: glance location-delete --url <URL> <IMAGE_ID>
+glance location-delete: error: argument --url is required
+
+glance location-delete --url vi://prme-haas-2-vio-vcenter.eng.vmware.com/VIO/vm/Template/ubuntu-15_04-template 79e9f1b0-af46-4011-9bab-9bffb3bde846
+403 Forbidden: Access was denied to this resource.: Cannot remove last location in the image. (HTTP 403)

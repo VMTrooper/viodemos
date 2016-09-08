@@ -1,0 +1,61 @@
+root@controller01:~# neutron-l2gw l2-gateway-create L2GW --device name=L2GW,interface_names=dvportgroup-694
+Created a new l2_gateway:
++-----------+---------------------------------------------------------------------------------------------------------------------
+--------------------------+
+| Field     | Value
+                          |
++-----------+---------------------------------------------------------------------------------------------------------------------
+--------------------------+
+| devices   | {"interfaces": [{"segmentation_id": [], "name": "dvportgroup-694"}], "id": "f642057c-13ab-4c56-b444-69fc6cab40fa", "
+device_name": "edge-155"} |
+| id        | 369dbf17-2812-4864-b024-994c4e238346
+                          |
+| name      | L2GW
+                          |
+| tenant_id | 1b4f295dda9044b6ab7f2c0b0760ce87
+                          |
++-----------+---------------------------------------------------------------------------------------------------------------------
+--------------------------+
+
+
+root@controller01:~# neutron-l2gw l2-gateway-connection-create L2GW 1a6bf518-92db-487f-b0a6-d115878f10a0 --default-segmentation-id
+ 964
+Created a new l2_gateway_connection:
++-----------------+--------------------------------------+
+| Field           | Value                                |
++-----------------+--------------------------------------+
+| id              | 325536ae-03b0-4dec-9716-80a24f659755 |
+| l2_gateway_id   | 369dbf17-2812-4864-b024-994c4e238346 |
+| network_id      | 1a6bf518-92db-487f-b0a6-d115878f10a0 |
+| segmentation_id | 964                                  |
+| tenant_id       | 1b4f295dda9044b6ab7f2c0b0760ce87     |
++-----------------+--------------------------------------+
+
+
+root@controller01:~# neutron-l2gw --debug l2-gateway-list
+DEBUG: keystoneclient.session REQ: curl -g -i -X GET http://10.28.228.50:35357/v2.0 -H "Accept: application/json" -H "User-Agent:
+python-keystoneclient"
+DEBUG: keystoneclient.session RESP: [200] date: Tue, 17 May 2016 23:36:15 GMT vary: X-Auth-Token content-length: 339 content-type:
+ application/json x-distribution: Ubuntu
+RESP BODY: {"version": {"status": "stable", "updated": "2014-04-17T00:00:00Z", "media-types": [{"base": "application/json", "type"
+: "application/vnd.openstack.identity-v2.0+json"}], "id": "v2.0", "links": [{"href": "http://10.28.228.50:35357/v2.0/", "rel": "se
+lf"}, {"href": "http://docs.openstack.org/", "type": "text/html", "rel": "describedby"}]}}
+
+DEBUG: stevedore.extension found extension EntryPoint.parse('table = cliff.formatters.table:TableFormatter')
+DEBUG: stevedore.extension found extension EntryPoint.parse('csv = cliff.formatters.commaseparated:CSVLister')
+DEBUG: stevedore.extension found extension EntryPoint.parse('yaml = clifftablib.formatters:YamlFormatter')
+DEBUG: stevedore.extension found extension EntryPoint.parse('json = clifftablib.formatters:JsonFormatter')
+DEBUG: stevedore.extension found extension EntryPoint.parse('html = clifftablib.formatters:HtmlFormatter')
+DEBUG: networking_l2gw.l2gatewayclient.l2gateway.v2_0.l2gateway.Listl2gateway get_data(Namespace(columns=[], fields=[], formatter=
+'table', max_width=0, page_size=None, quote_mode='nonnumeric', request_format='json', show_details=False, sort_dir=[], sort_key=[]
+))
+DEBUG: keystoneclient.auth.identity.v2 Making authentication request to http://10.28.228.50:35357/v2.0/tokens
+DEBUG: keystoneclient.session REQ: curl -g -i -X GET http://10.28.228.50:9696/v2.0/l2-gateways.json -H "User-Agent: python-neutronclient" -H "Accept: application/json" -H "X-Auth-Token: {SHA1}7a7a069e3e6983a2a351f8e89641813a7e281dab"
+DEBUG: keystoneclient.session RESP: [200] date: Tue, 17 May 2016 23:36:15 GMT content-length: 286 content-type: application/json; charset=UTF-8 x-openstack-request-id: req-af52d667-497f-4500-9dca-7a2ed82fa5ab
+RESP BODY: {"l2_gateways": [{"tenant_id": "1b4f295dda9044b6ab7f2c0b0760ce87", "id": "369dbf17-2812-4864-b024-994c4e238346", "devices": [{"interfaces": [{"segmentation_id": [], "name": "dvportgroup-694"}], "id": "f642057c-13ab-4c56-b444-69fc6cab40fa", "device_name": "edge-155"}], "name": "L2GW"}]}
+
++--------------------------------------+------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+| id                                   | name | devices                                                                                                                                       |
++--------------------------------------+------+-----------------------------------------------------------------------------------------------------------------------------------------------+
+| 369dbf17-2812-4864-b024-994c4e238346 | L2GW | {"interfaces": [{"segmentation_id": [], "name": "dvportgroup-694"}], "id": "f642057c-13ab-4c56-b444-69fc6cab40fa", "device_name": "edge-155"} |
++--------------------------------------+------+-----------------------------------------------------------------------------------------------------------------------------------------------+
