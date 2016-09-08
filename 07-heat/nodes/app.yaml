@@ -1,0 +1,36 @@
+heat_template_version: 2013-05-23
+
+description: Deploy a single compute instance with a floating IP
+
+parameters:
+  key_name:
+    type: string
+    label: Key Name
+    description: Name of key-pair to be used for compute instance
+    default: demo-keypair
+  image_id:
+    type: string
+    label: Image ID
+    description: Image to be used for compute instance
+    default: ubuntu-14.04-server-amd64
+  instance_type:
+    type: string
+    label: Instance Type
+    description: Type of instance (flavor) to be used
+    default: m1.small
+  network:
+    type: string
+    label: Network name or ID
+    description: Network to attach server to.
+    default: app-network
+
+resources:
+  app:
+    type: OS::Nova::Server
+    properties:
+      name: app 
+      key_name: { get_param: key_name }
+      image: { get_param: image_id }
+      flavor: { get_param: instance_type }
+      networks: 
+        - network: { get_param: network }
