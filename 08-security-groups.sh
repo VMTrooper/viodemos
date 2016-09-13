@@ -14,5 +14,5 @@ echo "openstack security group rule create --src-ip 0.0.0.0/0 --dst-port 33333 c
 openstack security group rule create --src-ip 0.0.0.0/0 --dst-port 33333 cli-group
 read -n1 -r key
 
-echo 'openstack server add security group "CLI Rocks!-1" cli-group'
-openstack server add security group 'CLI Rocks!-1' cli-group
+echo 'openstack server add security group web cli-group'
+openstack server add security group web cli-group

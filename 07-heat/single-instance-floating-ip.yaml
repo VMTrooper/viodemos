@@ -27,7 +27,7 @@ parameters:
     type: string
     label: Provider Network UUID
     description: Network to attach server to.
-    default: cb1b902-a704-4aec-a528-8fce5d5606ab
+    default: acb1b902-a704-4aec-a528-8fce5d5606ab
 
 
 resources:
